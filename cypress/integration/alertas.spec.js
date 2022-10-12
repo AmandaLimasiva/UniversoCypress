@@ -28,3 +28,14 @@ it('Deve cancelar a solicitação', function(){
     cy.get('#result').should('have.text', 'Mensagem não confirmada')
     
 })
+
+it('Deve exibir mensagem de boas vindas com meu nome', function(){
+    cy.visit('/javascript_alerts')
+
+    cy.window().then(function($win){
+        cy.stub($win, 'prompt').returns('Amanda')
+        cy.contains('button', 'Prompt').click()
+    })
+    cy.get('#result').should('have.text', 'Olá, Amanda')
+
+})
